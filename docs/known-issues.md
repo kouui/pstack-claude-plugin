@@ -47,6 +47,7 @@
 | C-10 | port | open | 只剩 Claude 系列模型后,`interrogate`、`arena`、`show-me-your-work` 等"异族模型交叉评审"的设计前提(不同模型家族)不再成立,只剩 opus 和 sonnet 的差异。需决定如何保持评审独立性(不同上下文、不同 rubric、不同模型档位) |
 | C-11 | port | open | 移植时把 `grok-4.7-xhigh-fast` 机械替换为 `sonnet xhigh`,把 `claude-opus-5-5-xhigh` 替换为 `opus xhigh`。各角色是否应该用 haiku(如 `how explorer`、`why investigators`)尚未评估;`effort` 值是否被当前 Agent 工具接受也未实测 |
 | C-12 | port | open | README 和 `docs/guide` 是上游作者口吻,仍大量提到 Cursor、`/` 菜单、Option+Enter、`/loop`、`.cursor/skills/` 等;`README.md` 仍链接 benny 自动化包(未移植,链接指向上游 GitHub) |
+| C-13 | port | open | 推理强度只用 `high` 和 `medium`(已替换默认值并把预算改为两档)。`poteto-mode` 的 "Match the model to the job" 仍提到 fast 模式和 slug 的 `-fast` 后缀,Claude Code 没有对应概念,需清理 |
 | C-09 | port | open | 多个 skill 的文档示例写死 Cursor 路径(`~/.cursor/rules/pstack-models.mdc`、`.cursor/skills/verify-<app>/`、`~/.cursor/projects/<slug>/agent-transcripts`) |
 
 ## 其他

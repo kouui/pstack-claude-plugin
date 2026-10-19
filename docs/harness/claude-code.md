@@ -31,7 +31,7 @@ pstack skills use Cursor names. In Claude Code, read this file once per session,
 
 | Cursor | Claude Code |
 | --- | --- |
-| `claude-<family>-<version>-<effort>[-fast]`, such as `opus xhigh` | `model: "opus"` and `effort: "xhigh"`. `model` takes only `opus`, `sonnet`, `haiku`, `fable`. Drop `-fast`. |
+| `claude-<family>-<version>-<effort>[-fast]`, such as `claude-opus-5-5-high` | `model: "opus"` and `effort: "high"`. `model` takes only `opus`, `sonnet`, `haiku`, `fable`. Drop `-fast`. |
 | A `grok-*`, `gpt-*`, or other non-Claude slug | Omit `model` so the agent runs on the session model, and say so. |
 | `auto` or `inherit-parent` | Omit `model`. |
 | The `pstack-models.md` rule, `~/.claude/rules/pstack-models.md` | `~/.claude/rules/pstack-models.md`. Claude Code loads it into every new session, so its role lines are already in context. If they are not, read the file. If the file or the role's line is missing, use the skill's default slug. |
@@ -41,8 +41,8 @@ pstack skills use Cursor names. In Claude Code, read this file once per session,
 
 Claude Code loads every `.md` file in `~/.claude/rules/` into each new session, so `setup-pstack` writes its rule there. Follow its steps with these changes:
 
-- Detect. The detected models are the `model` values that the `Agent` tool schema lists, each with an effort from its `effort` values. Write a real model as `<model> <effort>`, such as `opus xhigh`. The effort is the last token, so the budget step works as written.
-- Defaults. Map each default slug with the rows above: `opus xhigh` is `opus xhigh`, and `sonnet xhigh` is `inherit-parent`.
+- Detect. The detected models are the `model` values that the `Agent` tool schema lists, each with an effort from its `effort` values. Write a real model as `<model> <effort>`, such as `opus high`. The effort is the last token, so the budget step works as written.
+- Defaults. Map each default slug with the rows above: `claude-opus-5-5-high` is `opus high`.
 - Write. Write `~/.claude/rules/pstack-models.md` with no frontmatter, then the comment lines, the `# budget` line, and one line per role from step 5. Overwrite the whole file. Never put the role lines in `CLAUDE.md` or `AGENTS.md`.
 
 ## Paths

@@ -23,14 +23,12 @@ The default role-to-model mapping is the rule shape shown in step 5 below. If `~
 
 ### 3. Budget, map, and confirm
 
-**(a) Ask for a budget.** Prefer AskUserQuestion over free text; in `-p` mode ask in plain text. Offer these four options with these exact labels, and name the current budget when the rule records one. With no rule, say that `large` matches the skill defaults.
+**(a) Ask for a budget.** Prefer AskUserQuestion over free text; in `-p` mode ask in plain text. Offer these two options with these exact labels, and name the current budget when the rule records one. With no rule, say that `high` matches the skill defaults.
 
-- `unlimited — max reasoning`
-- `large — xhigh reasoning`
-- `medium — high reasoning`
-- `small — medium reasoning`
+- `high — high reasoning`
+- `medium — medium reasoning`
 
-**(b) Apply it.** Build the working table from the skill defaults, and on a re-run keep any role whose model you changed. A role value is `<model> <effort>`. `unlimited`, `large`, `medium`, and `small` set the effort of every real entry, panel entries included, to `max`, `xhigh`, `high`, or `medium`. The effort ladder is `max` > `xhigh` > `high` > `medium` > `low`. If the session does not accept the target effort for that model, use the highest effort it accepts at or below the target. `inherit-parent` and `auto` do not change. So `unlimited` turns `opus xhigh` into `opus max`, and `small` turns `sonnet xhigh` into `sonnet medium`.
+**(b) Apply it.** Build the working table from the skill defaults, and on a re-run keep any role whose model you changed. A role value is `<model> <effort>`, and the effort is only `high` or `medium`. The budget sets the effort of every real entry, panel entries included. `inherit-parent` and `auto` do not change. So `medium` turns `sonnet high` into `sonnet medium`. If the session does not accept the effort for that model, ask the user to choose.
 
 **(c) Show the roles and confirm.** Show every role with its value, marking any model not in the detected set as needing a choice. Also list each line step 2 dropped. Ask whether to accept as-is or change specific roles, offering the detected models plus `inherit-parent` and `auto` (both mean: this role runs on the parent chat model) as the options. For panel roles (arena runners, architect runners, interrogate reviewers) the value is a list, and one subagent runs per entry, alias entries included, so the list length sets the count. `arena cross-judge pool` is also a list, but Arena selects one value from it whose model differs from the parent's when possible. `swarm workers` is the default model for every worker unless a race or comparison assigns another model per arm.
 
@@ -45,24 +43,24 @@ Write `~/.claude/rules/pstack-models.md` with no frontmatter, then the comment l
 ```
 # pstack model configuration. One line per role. Delete a line to fall back to the skill default.
 # `inherit-parent` or `auto` as a value: the role runs on the parent chat model (omit the Agent `model`). Alias entries in a panel list still count toward its fan-out.
-# budget: large (xhigh)
-feature, refactoring: sonnet xhigh
-bug-fix: sonnet xhigh
-perf-issue: sonnet xhigh
-hillclimb: sonnet xhigh
-judgment and prose: opus xhigh
-hardest tasks: opus xhigh
-how explorer: sonnet xhigh
-how explainer: opus xhigh
-why investigators: sonnet xhigh
-why synthesizer: opus xhigh
-reflect tooling: sonnet xhigh
-reflect judgment, divergent, synthesizer: opus xhigh
-arena runners: opus xhigh, sonnet xhigh
-arena cross-judge pool: opus xhigh, sonnet xhigh
-swarm workers: sonnet xhigh
-architect runners: opus xhigh, sonnet xhigh
-interrogate reviewers: opus xhigh, sonnet xhigh
+# budget: high
+feature, refactoring: sonnet high
+bug-fix: sonnet high
+perf-issue: sonnet high
+hillclimb: sonnet high
+judgment and prose: opus high
+hardest tasks: opus high
+how explorer: sonnet high
+how explainer: opus high
+why investigators: sonnet high
+why synthesizer: opus high
+reflect tooling: sonnet high
+reflect judgment, divergent, synthesizer: opus high
+arena runners: opus high, sonnet high
+arena cross-judge pool: opus high, sonnet high
+swarm workers: sonnet high
+architect runners: opus high, sonnet high
+interrogate reviewers: opus high, sonnet high
 ```
 
 ### 6. Confirm
