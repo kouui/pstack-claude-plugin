@@ -44,6 +44,9 @@
 | C-06 | port | open | 适配文档没有覆盖 `orchestrate`、`/loop`、Cursor Projects 在 Claude Code 里的对应方式 |
 | C-07 | port | open | 依赖 Cursor 独有功能的 skill 和步骤:`make-bot-ui`(Grok Bot、Tailscale)、Bugbot 分诊、Cursor Automations、cloud agent、`/visualize`、内置 `create-skill`、cursor-team-kit 的 `/deslop`、Origin forge。需逐个决定删除、替换或保留为可跳过 |
 | C-08 | port | open | 脚本(`orch`、`watch-pr`、`check-plan.mjs`)依赖 bun/node,未在本环境运行过测试;`watch-pr` 依赖 `gh` |
+| C-10 | port | open | 只剩 Claude 系列模型后,`interrogate`、`arena`、`show-me-your-work` 等"异族模型交叉评审"的设计前提(不同模型家族)不再成立,只剩 opus 和 sonnet 的差异。需决定如何保持评审独立性(不同上下文、不同 rubric、不同模型档位) |
+| C-11 | port | open | 移植时把 `grok-4.7-xhigh-fast` 机械替换为 `sonnet xhigh`,把 `claude-opus-5-5-xhigh` 替换为 `opus xhigh`。各角色是否应该用 haiku(如 `how explorer`、`why investigators`)尚未评估;`effort` 值是否被当前 Agent 工具接受也未实测 |
+| C-12 | port | open | README 和 `docs/guide` 是上游作者口吻,仍大量提到 Cursor、`/` 菜单、Option+Enter、`/loop`、`.cursor/skills/` 等;`README.md` 仍链接 benny 自动化包(未移植,链接指向上游 GitHub) |
 | C-09 | port | open | 多个 skill 的文档示例写死 Cursor 路径(`~/.cursor/rules/pstack-models.mdc`、`.cursor/skills/verify-<app>/`、`~/.cursor/projects/<slug>/agent-transcripts`) |
 
 ## 其他
