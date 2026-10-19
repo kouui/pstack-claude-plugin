@@ -39,7 +39,7 @@
 | --- | --- | --- | --- |
 | C-01 ([#12](https://github.com/kouui/pstack-claude-plugin/issues/12)) | port | open | **模型**:上游默认值是 `grok-4.7-xhigh-fast`(代码)、`claude-opus-5-5-xhigh`(判断)等。本仓库先只支持 opus-5.5、sonnet-5.5、haiku-5.5,其余按需添加。涉及 `setup-pstack`、`poteto-mode`、`interrogate`、`arena`、`how`、`why`、`swarm`、`reflect` 等所有读 `pstack-models` 规则的 skill |
 | C-02 ([#13](https://github.com/kouui/pstack-claude-plugin/issues/13)) | port | open | **适配层**:skill 正文仍使用 Cursor 的名字(`Task`、`AskQuestion`、`generalPurpose`、`readonly`、`.cursor/skills`、`agent-transcripts`),靠 `docs/harness/claude-code.md` 每会话读一次来翻译。应改为直接写 Claude Code 的名字,并去掉适配文档 |
-| C-03 ([#14](https://github.com/kouui/pstack-claude-plugin/issues/14)) | port | open | **技能调用**:适配文档说 Skill 工具拒绝多数 pstack skill,要用 `Read` 读 SKILL.md。需在 Claude Code 里实测:带 `disable-model-invocation: true` 的 skill 能否被 `/pstack:<name>` 调用,skill 之间如何互相调用 |
+| C-03 ([#14](https://github.com/kouui/pstack-claude-plugin/issues/14)) | port | done | **技能调用**:适配文档说 Skill 工具拒绝多数 pstack skill,要用 `Read` 读 SKILL.md。需在 Claude Code 里实测:带 `disable-model-invocation: true` 的 skill 能否被 `/pstack:<name>` 调用,skill 之间如何互相调用 |
 | C-04 ([#15](https://github.com/kouui/pstack-claude-plugin/issues/15)) | port | open | `poteto-agent` 在 `~/.cursor/plugins/` 里搜 `poteto-mode/SKILL.md`,Claude Code 下应使用 `${CLAUDE_PLUGIN_ROOT}` |
 | C-05 ([#16](https://github.com/kouui/pstack-claude-plugin/issues/16)) | port | open | 子代理能力差异:`readonly: true` 只能映射为 `Explore`(仍有 Bash,靠 brief 约束);`resume` 不支持;`environment: cloud` 只能映射为 worktree。只读约束需要更可靠的做法 |
 | C-06 ([#17](https://github.com/kouui/pstack-claude-plugin/issues/17)) | port | open | 适配文档没有覆盖 `orchestrate`、`/loop`、Cursor Projects 在 Claude Code 里的对应方式 |
