@@ -10,9 +10,9 @@
 6. 运行 `node pstack/skills/poteto-mode/scripts/check-plan.mjs <plan.md>`，并修复它输出的每一行（**encode-lessons-in-structure** 原则 skill）。
 7. 交还计划。发布计划路径和脚本输出，然后停止。执行在操作员明确批准后开始，并按计划指定的执行 playbook 进行。
 
-**验证。** 仅有测试不足以作为验证。只有当某个 PR 的 unit、live 和 perf 检查框全部勾选时，该 PR 才算通过验证（**prove-it-works** 原则 skill）。这句话就是验证规则。每个验证块都以它开头。live 块是强制性的。在 PR head 上运行十个 lane，依据 **swarm** skill，通过控制 skill 驱动真实界面，使用 `swarm workers` 模型（默认 `sonnet high`）。每个 lane 是一个检查框，包含具体场景、它保存的截图以及通过判定条件。其中一个 lane 是 **针对 trunk 的回归 lane。** 它在 trunk 和 head 上运行同一个承载关键功能的场景。如果 trunk 没有该功能，该 lane 记录这一事实，并对该差异新增的行为以及用户等待的最终状态进行把关，而不是编造 trunk 的结果。性能门禁是双向的。trunk 和 head 都必须产生指定的指标。如果 trunk 缺少该功能，还要隔离该差异新增的工作，并为该工作以及用户等待的端到端状态设定绝对预算。不要在不可比的场景之间声称比率。性能块需指明指标、交错探测、先测得的 trunk 基线，以及导致失败的规则和数值。改变交互的 PR 需经过审查门禁。操作员在合并前通过聊天查看截图和视频进行审查。不改变交互的 PR 写入 `**Review gate.** None. <PR id> is not review-gated.`，并且其下不设检查框。
+**验证。** 仅有测试不足以作为验证。只有当某个 PR 的 unit、live 和 perf 检查框全部勾选时，该 PR 才算通过验证（**prove-it-works** 原则 skill）。这句话就是验证规则。每个验证块都以它开头。live 块是强制性的。在 PR head 上运行十个 lane，依据 **swarm** skill，通过项目自己的验证 skill（`verify-<app>`，见 `/create-verification-skill`）或项目自己的脚本驱动真实界面，使用 `swarm workers` 模型（默认 `sonnet high`）。每个 lane 是一个检查框，包含具体场景、它保存的截图以及通过判定条件。其中一个 lane 是 **针对 trunk 的回归 lane。** 它在 trunk 和 head 上运行同一个承载关键功能的场景。如果 trunk 没有该功能，该 lane 记录这一事实，并对该差异新增的行为以及用户等待的最终状态进行把关，而不是编造 trunk 的结果。性能门禁是双向的。trunk 和 head 都必须产生指定的指标。如果 trunk 缺少该功能，还要隔离该差异新增的工作，并为该工作以及用户等待的端到端状态设定绝对预算。不要在不可比的场景之间声称比率。性能块需指明指标、交错探测、先测得的 trunk 基线，以及导致失败的规则和数值。改变交互的 PR 需经过审查门禁。操作员在合并前通过聊天查看截图和视频进行审查。不改变交互的 PR 写入 `**Review gate.** None. <PR id> is not review-gated.`，并且其下不设检查框。
 
-**控制 skill。** 按界面选择。浏览器、Electron 和 Web UI 使用 `cursor-team-kit` 中的 `control-ui`。CLI 和 TUI 使用 `cursor-team-kit` 中的 `control-cli`。原生移动端使用仓库中已有的任何模拟器驱动 skill。触及两个界面的 PR 需要在两个界面上都设置 lane。没有控制 skill 的界面属于附录 C 中的风险，其 live 块仍需说明每个 lane 如何驱动它。
+**控制 skill。** 按界面选择。浏览器、Electron、Web UI、CLI 和 TUI 使用项目自己的验证 skill（`verify-<app>`，见 `/create-verification-skill`）或项目自己的脚本来驱动。原生移动端使用仓库中已有的任何模拟器驱动 skill。触及两个界面的 PR 需要在两个界面上都设置 lane。没有控制 skill 的界面属于附录 C 中的风险，其 live 块仍需说明每个 lane 如何驱动它。
 
 ````markdown
 # <Program> plan
@@ -68,7 +68,7 @@ Tests alone are not sufficient verification. A PR is verified only when its unit
 
 ### Boot recipe, for every live lane
 
-Each live lane runs on its own cloud VM at the PR head. Drive through `control-ui` or `control-cli` from `cursor-team-kit`.
+Each live lane runs in its own local git worktree at the PR head. Drive it with the project's own verification skill (`verify-<app>`, see `/create-verification-skill`) or the project's own scripts.
 
 - [ ] `git fetch origin <head-branch> && git checkout <head SHA>`.
 - [ ] <Start the backend and the surface. Wait for ready.>
@@ -120,7 +120,7 @@ Each live lane runs on its own cloud VM at the PR head. Drive through `control-u
 **Review gate.** The operator reviews before merge.
 
 - [ ] Copy lane <n> screenshots into `<media path>/<pr-id>-review-<slug>.png`.
-- [ ] Record a 30 to 60 second video of the change on a lane VM. Save it as `<media path>/<pr-id>-review.mp4`.
+- [ ] Record a 30 to 60 second video of the change from a lane's worktree. Save it as `<media path>/<pr-id>-review.mp4`.
 - [ ] Post the screenshots and the video in chat. Stop at merge-ready. Wait for the operator's click.
 
 **Merge.**

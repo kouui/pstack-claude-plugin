@@ -26,9 +26,9 @@ disable-model-invocation: true
 
 ## 阶段 B：Fan out
 
-在一条消息中派出全部 N 个 worker，使用 `subagent_type: generalPurpose`、`environment: "cloud"`、`run_in_background: true`，并将 `model` 按第 4 步设置；若为 `auto` 或 `inherit-parent`，则保持未设置。只有当 worker 需要访问用户电脑上的内容时，才使用 `environment: "local"`。
+在一条消息中派出全部 N 个 worker，使用 `subagent_type: generalPurpose`、`isolation: "worktree"`、`run_in_background: true`，并将 `model` 按第 4 步设置；若为 `auto` 或 `inherit-parent`，则保持未设置。每个 worker 都在自己的本地 git worktree 和分支中运行。
 
-当 worker 必须从非默认的已推送分支开始时，传入 `cloud_base_branch`。
+当 worker 必须从非默认的已推送分支开始时，让 worker 在它的 worktree 中检出该分支。
 
 每份 brief 都必须独立成立。包含目标、范围、确切的切片或竞速分支、验证方法，以及需要报告的内容。报告使用 `PASS`、`ISSUES` 或 `BLOCKED`，并附带证据。能够证明缺陷存在的 worker 报告 `ISSUES`，并列出它能证明的每一个问题，而不只是第一个。
 

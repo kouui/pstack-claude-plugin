@@ -29,7 +29,7 @@ color: yellow
 - 文档、RFC、readme、PR 描述或提交信息 → **technical-writing** skill（`/technical-writing`）。
 - 提交前 → `deslop` skill（`/deslop`）。
 - 评审前 → **no-comments** skill（`/no-comments`）。
-- 发布 UI / IDE / CLI → 对应的控制 skill。`cursor-team-kit` 提供 `control-cli`（CLI 和 TUI）和 `control-ui`（浏览器、Electron 或 Web UI）。对于 bug 修复，先在同一个界面上自己复现。只有在下文 Bug fix 第 1 步的窄例外情况下，才把任务交给用户。
+- 发布 UI / IDE / CLI → 用项目自己的验证 skill（`verify-<app>`，见 `/create-verification-skill`）或项目自己的脚本来驱动它。对于 bug 修复，先在同一个界面上自己复现。只有在下文 Bug fix 第 1 步的窄例外情况下，才把任务交给用户。
 - 运行基准测试、自己测量性能，或报告你测得的加速或回退 → 在报告或据此行动之前，先使用 **benchmark-checklist** skill 检查该数字。
 - 任何 PR 状态请求（"babysit this"、"get it green"、"address the bugbot comments"，最常见的是"check on PR X"或"X 还有什么待处理的"）→ **Babysit** playbook（`playbooks/babysit.md`），而不是 Cursor 内置的 babysit skill，后者的描述与上述词语重合。永远不要因为仅仅打开了一个 PR 就触发它。轮询之前先声明其模式。该 playbook 的第 1 步负责把请求映射到模式。在阶段代理内部调用 `drive` 会导致该代理无法完成其回合。
 - 被要求合并或发布一个全部通过的 stack → **Shipping** playbook（`playbooks/shipping.md`）。全部通过并不等于安全。在独立的逐 PR 裁决之前，不得预先设置任何合并，而且只有从根开始的、连续且已验证的一段才能合并。
@@ -144,7 +144,7 @@ color: yellow
 - **Orchestrate.** 交给单个协调聊天的长期项目：跨多天、许多堆叠的 PR、数十到数百个子代理，人工回合极少（"run this whole project"、"own this migration until it lands"）。与 Autonomous run 不同，后者是把一个任务推进到某个判定条件。一个代理在会话预算内就能完成的工作应路由到那里，而不是这里，无论措辞听起来多么像项目。
 - **Autopilot-full.** 一个由独立 PR 组成的队列，在完全自主的情况下推进到合并。每个 PR 由一个负责人从构建一直推进到合并，根代理在该负责人合并之前对每个 PR 进行 swarm 验证（"autopilot this queue"、"full autopilot"、一 PR 一负责人的项目）。
 - **Autopilot-stack.** 在完全自主的情况下构建并验证的一组变更，交付为一条由操作者合并的线性、已评审的基础分支 stack（"autopilot-stack"、"stack them, don't ship"、"build the stack, I'll land it"）。
-- **Session pickup.** 根据对话记录、云代理 URL 或已推送的分支，恢复或接手先前代理进行中的工作。
+- **Session pickup.** 根据对话记录或已推送的分支，恢复或接手先前代理进行中的工作。
 - **Pause safely.** 在明确暂停、离线、Cursor 重启或即将发生上下文压缩时，干净地挂起进行中的工作，以便之后恢复。它是 Session pickup 的互补流程。
 - **Multi-phase or multi-PR plan.** 跨越多个阶段或堆叠 PR 的工作。文件：`playbooks/multi-phase-plan.md`。
 - **Worktree and simulator cleanup.** 通过清理已合并或已废弃的 git worktree 以及过期的 iOS 模拟器来回收本地磁盘空间（"what's using my disk"、"clean up worktrees"、"prune safe-to-prune worktrees"、"free up space"、"delete old simulators"）。文件：`playbooks/worktree-cleanup.md`。

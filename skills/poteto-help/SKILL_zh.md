@@ -72,7 +72,7 @@ pstack 是为 Cursor 构建的，它也可以通过 `/plugin marketplace add cur
 | 了解一个小 diff 可能在其自身之外破坏什么 | [`/blast-radius`](../blast-radius/SKILL.md) |
 | 在跨越函数边界的代码之前，确定类型和模块形态 | [`/architect`](../architect/SKILL.md) |
 | 对同一个简报获得多次尝试，并合并为最佳版本 | [`/arena`](../arena/SKILL.md) |
-| 将并行检查分片运行，或以云端 agent 的方式竞相执行 worker | [`/swarm`](../swarm/SKILL.md) |
+| 将并行检查分片运行，或让 worker 竞相执行，每个 worker 使用各自的 git worktree 和分支 | [`/swarm`](../swarm/SKILL.md) |
 | 让不同模型审查 diff，并尝试将其破坏 | [`/interrogate`](../interrogate/SKILL.md) |
 | 当存在廉价的本地测试时，以测试先行的方式修复 bug | [`/tdd`](../tdd/SKILL.md) |
 | 将 TypeScript 规则应用于 `.ts` 或 `.tsx` 工作 | [`/typescript-best-practices`](../typescript-best-practices/SKILL.md) |
@@ -107,7 +107,6 @@ pstack 是为 Cursor 构建的，它也可以通过 `/plugin marketplace add cur
 
 不在 pstack 中的内容：
 
-- `control-cli` 和 `control-ui` 随 `cursor-team-kit` 插件提供。
 - `/loop` 和 `/create-skill` 是运行环境内置功能。
 - pstack 没有 `/orchestrate` skill。Orchestrate 是 `/poteto-mode` 的一个 playbook。如果斜杠菜单显示 `/orchestrate`，说明是另一个插件提供的。
 
@@ -136,7 +135,7 @@ Principle 是 `/poteto-mode` 读取并在回复中引用的单条规则 skill。
 | 新的模型选择没有效果 | `/setup-pstack` 的规则适用于新聊天。开始一个新聊天。 |
 | 运行成本高于预期 | 参见"完成设置"下的成本段落。 |
 | 某个 skill 没有自动加载 | 只有 `/setup-pstack` 会根据用户的话语加载。其他 skill 在用户输入它们时加载，或在 `/poteto-mode` 运行它们时加载，而它不会运行每一个 skill。 |
-| 并行 agent 互相覆盖了内容 | 为每个 agent 提供自己的 worktree，或将它们作为云端 agent 运行，每个云端 agent 都有自己的机器。 |
+| 并行 agent 互相覆盖了内容 | 为每个 agent 提供自己的 git worktree 和分支。 |
 | 一次夜间运行有进展，但没有完成任何事 | `/loop` 需要一个可能通过也可能失败的检查，而不是一个时长。参见[指南第 7 页](../../docs/guide/07-overnight.md)。 |
 | 回复因构建变绿而声称成功 | 要求提供真实的命令、流程、存储值或性能剖析结果。这就是 prove-it-works principle。 |
 

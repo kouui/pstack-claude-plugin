@@ -1,6 +1,6 @@
 # 你睡觉时让工作继续运行
 
-这是前面所有内容的回报。一个你信得过、能自己验证工作的 agent，才能放心交给它一个难任务，让你不用盯着。让这件事安全的不是希望，而是一个可检查的完成条件、一个隔离的 worktree 或云端 agent，以及一份你第二天早上可以审计的决策日志。
+这是前面所有内容的回报。一个你信得过、能自己验证工作的 agent，才能放心交给它一个难任务，让你不用盯着。让这件事安全的不是希望，而是一个可检查的完成条件、一个隔离的 worktree，以及一份你第二天早上可以审计的决策日志。
 
 ![她在门口向机器人道晚安，机器人照常运转着工厂，其中一个在"BUILD LOOP ACTIVE"招牌下的 DECISION LOG 墙板上更新内容。](./images/overnight.jpg)
 
@@ -93,7 +93,7 @@ flowchart TD
 
 ## 并行运行多个项目
 
-[Cursor Project](https://cursor.com/blog/projects) 为一个协调者 agent 提供一个持久的线程。协调者不写代码，它指挥 subagent，而 subagent 默认在云端运行，因此即使你的笔记本合上，工作也会继续。这正是 Orchestrate playbook 所预期的形态。向协调者发送提示时以 `/poteto-mode` 开头，它派生出的 subagent 会遵循各个 playbook。
+[Cursor Project](https://cursor.com/blog/projects) 为一个协调者 agent 提供一个持久的线程。协调者不写代码，它指挥 subagent，每个 subagent 在自己的本地 git worktree 和分支里工作。这正是 Orchestrate playbook 所预期的形态。向协调者发送提示时以 `/poteto-mode` 开头，它派生出的 subagent 会遵循各个 playbook。
 
 以下几个习惯会有所帮助：
 
