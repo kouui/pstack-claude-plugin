@@ -31,10 +31,10 @@ Launch all reviewers in a single message with the Task tool, one per entry on th
 
 | Subagent | Default model |
 |----------|---------------|
-| Reviewer A | `opus high` |
-| Reviewer B | `sonnet high` |
+| Reviewer A | `sonnet high` |
+| Reviewer B | `codex` |
 
-Each reviewer gets `subagent_type: generalPurpose`, `readonly: true`, and `model` set to its configured entry, or its table default when there is no configured line. Omit `model` for an `auto` or `inherit-parent` entry, so that reviewer runs on the parent model.
+Each reviewer gets `subagent_type: generalPurpose`, `readonly: true`, and `model` set to its configured entry, or its table default when there is no configured line. Omit `model` for an `auto` or `inherit-parent` entry, so that reviewer runs on the parent model. A `codex` entry is not a Claude model. It runs through the Codex CLI as the Claude Code adapter's Models table describes. The reviewer stays read-only.
 
 If the Agent tool rejects a configured entry, run that reviewer on its table default and say so. If it rejects a table default, spawn with the closest valid model from the error message (prefer the same model and reasoning tier), and open a separate PR to update the default table. Do not block the review on the model issue. Never treat an alias entry as a rejected model or apply the fallback to it.
 

@@ -1,6 +1,6 @@
 # pstack
 
-> Claude Code port of [cursor/plugins pstack](https://github.com/cursor/plugins/tree/main/pstack) (see [UPSTREAM.md](./UPSTREAM.md)). Models: `opus`, `sonnet`, `haiku` only for now. The text below is the upstream readme in the original author's voice and still mentions Cursor in places; known gaps are in [docs/known-issues.md](./docs/known-issues.md).
+> Claude Code port of [cursor/plugins pstack](https://github.com/cursor/plugins/tree/main/pstack) (see [UPSTREAM.md](./UPSTREAM.md)). Models: `opus`, `sonnet`, `haiku` only for now, plus the Codex CLI as a panel seat. The text below is the upstream readme in the original author's voice and still mentions Cursor in places; known gaps are in [docs/known-issues.md](./docs/known-issues.md).
 
 i'm [poteto](https://x.com/poteto). i'm not a president or ceo, but i've worked with millions of lines of code at Meta, Netflix, and Cursor. i'm also on the react core team where i help build and maintain react compiler.
 
@@ -34,7 +34,7 @@ two steps:
 
 new here? the [pstack guide](./docs/guide/README.md) walks you through a first real task, from setup and prompting through verification and overnight runs. stuck, or unsure which skill fits? ask [`/poteto-help`](./skills/poteto-help/SKILL.md).
 
-that's it. the other skills are situational, and the mode skill uses them for you as needed. out of the box the mode splits work by model strength: code delegates (feature, refactoring, bug fix, perf, hillclimb) go to sonnet 5.5, while the hardest changes, prose, and judgment go to opus 5.5. the default panel is opus 5.5 / sonnet 5.5. [`/setup-pstack`](./skills/setup-pstack/SKILL.md) changes any of it.
+that's it. the other skills are situational, and the mode skill uses them for you as needed. out of the box the mode splits work by model strength: code delegates (feature, refactoring, bug fix, perf, hillclimb) go to sonnet 5.5, while the hardest changes, prose, and judgment go to opus 5.5. the default panel is sonnet 5.5 and codex, and the lighter reading roles (how explorer, why investigators, reflect tooling) run on haiku 5.5. [`/setup-pstack`](./skills/setup-pstack/SKILL.md) changes any of it.
 
 ## usage
 

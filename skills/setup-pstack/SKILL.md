@@ -11,13 +11,13 @@ In Claude Code, read [the Claude Code adapter](../../docs/harness/claude-code.md
 
 Write `~/.claude/rules/pstack-models.md`, a rule that sets pstack's model per role. Claude Code loads every `.md` file in `~/.claude/rules/` into each new session.
 
-This plugin supports three models for now: `opus`, `sonnet`, `haiku` (the 5.5 family). Other models can be added later.
+This plugin supports three models for now: `opus`, `sonnet`, `haiku` (the 5.5 family). Panel roles can also use `codex`, which runs through the Codex CLI and is not a model. Other models can be added later.
 
 ## Steps
 
 ### 1. Detect available models
 
-Read the `model` values that the `Agent` tool schema lists, and keep only `opus`, `sonnet`, and `haiku`. If you cannot read them, ask the user which of the three they can use. Never write a model you have not confirmed is available. The aliases `inherit-parent` and `auto` are always valid even though they are not models.
+Read the `model` values that the `Agent` tool schema lists, and keep only `opus`, `sonnet`, and `haiku`. If you cannot read them, ask the user which of the three they can use. Never write a model you have not confirmed is available. The aliases `inherit-parent` and `auto` are always valid even though they are not models. Also run `command -v codex`. When it succeeds, `codex` is available as a panel entry. It goes only in the panel roles: arena runners, arena cross-judge pool, architect runners, and interrogate reviewers.
 
 ### 2. Load current state
 
@@ -30,13 +30,13 @@ The default role-to-model mapping is the rule shape shown in step 5 below. If `~
 - `high — high reasoning`
 - `medium — medium reasoning`
 
-**(b) Apply it.** Build the working table from the skill defaults, and on a re-run keep any role whose model you changed. A role value is `<model> <effort>`, and the effort is only `high` or `medium`. The budget sets the effort of every real entry, panel entries included. `inherit-parent` and `auto` do not change. So `medium` turns `sonnet high` into `sonnet medium`. If the session does not accept the effort for that model, ask the user to choose.
+**(b) Apply it.** Build the working table from the skill defaults, and on a re-run keep any role whose model you changed. A role value is `<model> <effort>`, and the effort is only `high` or `medium`. The budget sets the effort of every real entry, panel entries included. `inherit-parent`, `auto`, and `codex` do not change. So `medium` turns `sonnet high` into `sonnet medium`. If the session does not accept the effort for that model, ask the user to choose.
 
-**(c) Show the roles and confirm.** Show every role with its value, marking any model not in the detected set as needing a choice. Also list each line step 2 dropped. Ask whether to accept as-is or change specific roles, offering the detected models plus `inherit-parent` and `auto` (both mean: this role runs on the parent chat model) as the options. For panel roles (arena runners, architect runners, interrogate reviewers) the value is a list, and one subagent runs per entry, alias entries included, so the list length sets the count. `arena cross-judge pool` is also a list, but Arena selects one value from it whose model differs from the parent's when possible. `swarm workers` is the default model for every worker unless a race or comparison assigns another model per arm.
+**(c) Show the roles and confirm.** Show every role with its value, marking any model not in the detected set as needing a choice. Also list each line step 2 dropped. Ask whether to accept as-is or change specific roles, offering the detected models plus `inherit-parent` and `auto` (both mean: this role runs on the parent chat model) as the options, and `codex` for panel roles when it is installed. For panel roles (arena runners, architect runners, interrogate reviewers) the value is a list, and one subagent runs per entry, alias entries included, so the list length sets the count. `arena cross-judge pool` is also a list, but Arena selects one value from it whose model differs from the parent's when possible. `swarm workers` is the default model for every worker unless a race or comparison assigns another model per arm.
 
 ### 4. Validate
 
-Every model written must be in the detected set. `inherit-parent` and `auto` always pass. If a chosen model is not available, stop and ask again.
+Every model written must be in the detected set. `inherit-parent` and `auto` always pass. `codex` passes only in a panel role, and only when the Codex CLI is installed. If a chosen model is not available, stop and ask again.
 
 ### 5. Write the rule
 
@@ -44,6 +44,7 @@ Write `~/.claude/rules/pstack-models.md` with no frontmatter, then the comment l
 
 ```
 # pstack model configuration. One line per role. Delete a line to fall back to the skill default.
+# `codex` as a panel entry: the seat runs through the Codex CLI.
 # `inherit-parent` or `auto` as a value: the role runs on the parent chat model (omit the Agent `model`). Alias entries in a panel list still count toward its fan-out.
 # budget: high
 feature, refactoring: sonnet high
@@ -52,17 +53,17 @@ perf-issue: sonnet high
 hillclimb: sonnet high
 judgment and prose: opus high
 hardest tasks: opus high
-how explorer: sonnet high
-how explainer: opus high
-why investigators: sonnet high
-why synthesizer: opus high
-reflect tooling: sonnet high
-reflect judgment, divergent, synthesizer: opus high
-arena runners: opus high, sonnet high
-arena cross-judge pool: opus high, sonnet high
+how explorer: haiku high
+how explainer: sonnet high
+why investigators: haiku high
+why synthesizer: sonnet high
+reflect tooling: haiku high
+reflect judgment, divergent, synthesizer: sonnet high
+arena runners: sonnet high, codex
+arena cross-judge pool: sonnet high, codex
 swarm workers: sonnet high
-architect runners: opus high, sonnet high
-interrogate reviewers: opus high, sonnet high
+architect runners: sonnet high, codex
+interrogate reviewers: sonnet high, codex
 ```
 
 ### 6. Confirm
