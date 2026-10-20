@@ -12,7 +12,7 @@
 4. [设计改动](./04-design.md)。在代码定型之前使用 `/architect`、`/arena`、`/swarm`、`/interrogate`、原型和计划。
 5. [构建并清理改动](./05-build-and-clean.md)。构建类 playbook、`/tdd`、`/unslop` 和 `/no-comments`。
 6. [验证并交付](./06-verify-and-ship.md)。在真实应用上证明行为，对测试很少覆盖到的部分做形式化验证，用 `/benchmark-checklist` 核查数字，然后开一个聚焦的 PR 并推进到合并。
-7. [你睡觉时让工作继续运行](./07-overnight.md)。循环之前的信任、过夜约定、可供审计的决策日志，以及可扩展到多个 agent 的 Project 和自动化。
+7. [你睡觉时让工作继续运行](./07-overnight.md)。循环之前的信任、过夜约定、可供审计的决策日志，以及可扩展到多个 agent 的协调者对话和定时运行。
 8. [用原则名称引导 agent](./08-principles.md)。在任务进行中用于重定向 agent 的 24 个名称。
 9. [定制你自己的版本](./09-make-it-yours.md)。你自己的模式、针对重复错误的 `/correct`，以及如何测试 skill 的改动。
 10. [配方与陷阱](./10-recipes-and-pitfalls.md)。可以直接复制的提示，以及应该避开的错误。

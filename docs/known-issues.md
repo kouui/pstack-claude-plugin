@@ -43,13 +43,13 @@
 | C-04 ([#15](https://github.com/kouui/pstack-claude-plugin/issues/15)) | port | open | `poteto-agent` 在 `~/.cursor/plugins/` 里搜 `poteto-mode/SKILL.md`,Claude Code 下应使用 `${CLAUDE_PLUGIN_ROOT}` |
 | C-05 ([#16](https://github.com/kouui/pstack-claude-plugin/issues/16)) | port | open | 子代理能力差异:`readonly: true` 只能映射为 `Explore`(仍有 Bash,靠 brief 约束);`resume` 不支持;`environment: cloud` 只能映射为 worktree。只读约束需要更可靠的做法 |
 | C-06 ([#17](https://github.com/kouui/pstack-claude-plugin/issues/17)) | port | open | 适配文档没有覆盖 `orchestrate`、`/loop`、Cursor Projects 在 Claude Code 里的对应方式 |
-| C-07 ([#18](https://github.com/kouui/pstack-claude-plugin/issues/18)) | port | open | 依赖 Cursor 独有功能的 skill 和步骤:`make-bot-ui`(Grok Bot、Tailscale)、Bugbot 分诊、Cursor Automations、`/visualize`、Origin forge。(cloud agent、`cursor-team-kit` 的 `control-cli`/`control-ui` 已移除,并行工作改用本地 worktree;`/deslop` 已由本仓库自带;`create-skill` 视为 Claude Code 内置。)需逐个决定删除、替换或保留为可跳过 |
+| C-07 ([#18](https://github.com/kouui/pstack-claude-plugin/issues/18)) | port | open | 依赖 Cursor 独有功能的 skill 和步骤:Bugbot 分诊、Cursor Automations、`/visualize`、Origin forge。(`make-bot-ui`(Grok Bot)和 benny 自动化说明已删除;cloud agent、`cursor-team-kit` 的 `control-cli`/`control-ui` 已移除,并行工作改用本地 worktree;`/deslop` 已由本仓库自带;`create-skill` 视为 Claude Code 内置。)需逐个决定删除、替换或保留为可跳过 |
 | C-08 ([#19](https://github.com/kouui/pstack-claude-plugin/issues/19)) | port | open | 脚本(`orch`、`watch-pr`、`check-plan.mjs`)依赖 bun/node,未在本环境运行过测试;`watch-pr` 依赖 `gh` |
 | C-10 ([#20](https://github.com/kouui/pstack-claude-plugin/issues/20)) | port | open | 只剩 Claude 系列模型后,`interrogate`、`arena`、`show-me-your-work` 等"异族模型交叉评审"的设计前提(不同模型家族)不再成立,只剩 opus 和 sonnet 的差异。需决定如何保持评审独立性(不同上下文、不同 rubric、不同模型档位) |
 | C-11 ([#21](https://github.com/kouui/pstack-claude-plugin/issues/21)) | port | open | 移植时把 `grok-4.7-xhigh-fast` 机械替换为 `sonnet xhigh`,把 `claude-opus-5-5-xhigh` 替换为 `opus xhigh`。各角色是否应该用 haiku(如 `how explorer`、`why investigators`)尚未评估;`effort` 值是否被当前 Agent 工具接受也未实测 |
-| C-12 ([#22](https://github.com/kouui/pstack-claude-plugin/issues/22)) | port | open | README 和 `docs/guide` 是上游作者口吻,仍大量提到 Cursor、`/` 菜单、Option+Enter、`/loop`、`.cursor/skills/` 等;`README.md` 仍链接 benny 自动化包(未移植,链接指向上游 GitHub) |
+| C-12 ([#22](https://github.com/kouui/pstack-claude-plugin/issues/22)) | port | open | README 和 `docs/guide` 是上游作者口吻,仍大量提到 Cursor、`/` 菜单、Option+Enter、`/loop`、`.cursor/skills/` 等 |
 | C-13 ([#23](https://github.com/kouui/pstack-claude-plugin/issues/23)) | port | open | 推理强度只用 `high` 和 `medium`(已替换默认值并把预算改为两档)。`poteto-mode` 的 "Match the model to the job" 仍提到 fast 模式和 slug 的 `-fast` 后缀,Claude Code 没有对应概念,需清理 |
-| C-09 ([#24](https://github.com/kouui/pstack-claude-plugin/issues/24)) | port | open | 已改为 Claude Code 路径(`~/.claude/rules/`、`.claude/skills/`、`~/.claude/projects/<slug>/`),`worktree-audit.sh` 也已改读 `~/.claude/projects`。仍待检查:README 中作者口吻的 Cursor 描述、Automations/benny 包、`make-bot-ui` |
+| C-09 ([#24](https://github.com/kouui/pstack-claude-plugin/issues/24)) | port | open | 已改为 Claude Code 路径(`~/.claude/rules/`、`.claude/skills/`、`~/.claude/projects/<slug>/`),`worktree-audit.sh` 也已改读 `~/.claude/projects`。README 作者口吻的 Cursor 描述已按 Claude Code 改写,`make-bot-ui` 和 benny 包已删除 |
 
 ## 其他
 
