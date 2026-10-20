@@ -1,6 +1,6 @@
 {
   "name": "pstack",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Rigorous, parallelizable agent workflows: poteto-mode router with playbooks, verification-first skills, principles, and review subagents. Ported from cursor/plugins pstack.",
   "author": { "name": "kouui" },
   "homepage": "https://github.com/kouui/pstack-claude-plugin",
