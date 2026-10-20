@@ -10,7 +10,7 @@ poteto-mode 是某一个人的风格。底下的 playbook、路由和模型角�
 /automate-me
 ```
 
-你不需要描述自己的风格，因为 [`/automate-me`](../../../skills/automate-me/SKILL.md) 会从你的历史记录中读取它。它会挖掘当前工作区里你最近的 transcript，找出反复出现的偏好，包括你希望的回复方式、委派、验证、代码、文字和流程，然后询问你哪些模式真正代表你。它通过 CLAUDE 内置的 `create-skill` 流程起草 `.claude/skills/<your-name>-mode/SKILL.md`，把草稿交给 [`/unslop`](../../../skills/unslop/SKILL.md) 处理，并从 worktree 开一个 PR，让你像审查其他改动一样审查它。
+你不需要描述自己的风格，因为 [`/automate-me`](../../../skills/automate-me/SKILL.md) 会从你的历史记录中读取它。它会挖掘当前工作区里你最近的 transcript，找出反复出现的偏好，包括你希望的回复方式、委派、验证、代码、文字和流程，然后询问你哪些模式真正代表你。它按 Claude Code 的 skill 格式起草 `.claude/skills/<your-name>-mode/SKILL.md`，把草稿交给 [`/unslop`](../../../skills/unslop/SKILL.md) 处理，并从 worktree 开一个 PR，让你像审查其他改动一样审查它。
 
 每当你的习惯有变化时，就再运行一次：
 
@@ -57,7 +57,7 @@ poteto-mode 是某一个人的风格。底下的 playbook、路由和模型角�
 /poteto-mode write a skill for verifying database migrations in this repo
 ```
 
-编写 skill 符合 [编写或修改 skill 的 playbook](../../../skills/poteto-mode/playbooks/authoring-a-skill.md)。该 playbook 会经由 Claude 内置的 `create-skill` 进行，验证 frontmatter 和链接，并通过 Opening a PR playbook 交付结果。面向 agent 的文字要求比面向人的文字更高，因为一句没用的话会变成某个未来 agent 会遵循的指令。让 playbook 守住这个标准，不要徒手编写 `SKILL.md`。
+编写 skill 符合 [编写或修改 skill 的 playbook](../../../skills/poteto-mode/playbooks/authoring-a-skill.md)。该 playbook 会按 Claude Code 的 skill 格式编写 SKILL.md，验证 frontmatter 和链接，并通过 Opening a PR playbook 交付结果。面向 agent 的文字要求比面向人的文字更高，因为一句没用的话会变成某个未来 agent 会遵循的指令。让 playbook 守住这个标准，不要徒手编写 `SKILL.md`。
 
 有两类特殊情况有各自的生成器。如果一个 skill 必须驱动你的应用并证明其行为，它就是验证型 skill，应改用 [`/create-verification-skill`](../../../skills/create-verification-skill/SKILL.md) 和 [`/maintain-verification-skill`](../../../skills/maintain-verification-skill/SKILL.md)。如果一个 skill 用模型检查器、证明或其他验证器检查代码的某项属性，它就是形式化验证 skill，应改用 [`/create-formal-verification-skill`](../../../skills/create-formal-verification-skill/SKILL.md) 和 [`/maintain-formal-verification-skill`](../../../skills/maintain-formal-verification-skill/SKILL.md)。[验证并交付](./06-verify-and-ship.md#prove-a-property-with-a-formal-verification-skill) 涵盖这两类。
 

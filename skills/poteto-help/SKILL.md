@@ -108,7 +108,7 @@ Close calls:
 
 Not in pstack:
 
-- `/loop` and `/create-skill` are built into the harness.
+- `/loop` is built into the harness.
 - pstack has no `/orchestrate` skill. Orchestrate is a `/poteto-mode` playbook. If the slash menu shows `/orchestrate`, another plugin provides it.
 
 ## Playbooks and principles

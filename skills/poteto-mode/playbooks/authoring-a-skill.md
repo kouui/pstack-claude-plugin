@@ -2,7 +2,7 @@
 
 **You own the skill's voice.**
 
-1. Use the **create-skill** skill (Cursor's built-in for authoring SKILL.md files).
+1. Write the SKILL.md yourself in Claude Code's skill format: YAML frontmatter with `name` and `description`, then the body. Put project skills in `.claude/skills/<name>/SKILL.md` and personal skills in `~/.claude/skills/<name>/SKILL.md`. Put long reference material in files next to it and link them from the body. Draft it, check that it triggers on the prompts you expect, and iterate on the description until it does.
 2. Validate the skill: frontmatter has `name` and `description`, referenced files exist, cross-skill links resolve.
 3. Test cases if structural. Skip if subjective.
 4. Run **Opening a PR**.
