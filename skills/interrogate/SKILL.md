@@ -27,14 +27,14 @@ Before spawning reviewers, state the intent in one clear paragraph from the user
 
 ## Step 3, Spawn Reviewers
 
-Launch all reviewers in a single message with the Task tool, one per entry on the `interrogate reviewers` line in `~/.claude/rules/pstack-models.md`, labeled Reviewer A, B, and so on to match the entry count. If the rule or that line is missing, use the table defaults.
+Launch all reviewers in a single message with the Agent tool, one per entry on the `interrogate reviewers` line in `~/.claude/rules/pstack-models.md`, labeled Reviewer A, B, and so on to match the entry count. If the rule or that line is missing, use the table defaults.
 
 | Subagent | Default model |
 |----------|---------------|
 | Reviewer A | `sonnet high` |
 | Reviewer B | `codex` |
 
-Each reviewer gets `subagent_type: generalPurpose`, `readonly: true`, and `model` set to its configured entry, or its table default when there is no configured line. Omit `model` for an `auto` or `inherit-parent` entry, so that reviewer runs on the parent model. A `codex` entry is not a Claude model. It runs through the Codex CLI as the Claude Code adapter's Models table describes. The reviewer stays read-only.
+Each reviewer gets `subagent_type: "Explore"` (the brief says "do not edit files"), and `model` set to its configured entry, or its table default when there is no configured line. Omit `model` for an `auto` or `inherit-parent` entry, so that reviewer runs on the parent model. A `codex` entry is not a Claude model. It runs through the Codex CLI as the Claude Code adapter's Models table describes. The reviewer stays read-only.
 
 If the Agent tool rejects a configured entry, run that reviewer on its table default and say so. If it rejects a table default, spawn with the closest valid model from the error message (prefer the same model and reasoning tier), and open a separate PR to update the default table. Do not block the review on the model issue. Never treat an alias entry as a rejected model or apply the fallback to it.
 
