@@ -91,18 +91,17 @@ flowchart TD
 /poteto-mode orchestrate the store migration. own it until every package is converted and merged. i'll check in twice a day.
 ```
 
-## 并行运行多个项目
+## 并行运行多项工作
 
-[Cursor Project](https://cursor.com/blog/projects) 为一个协调者 agent 提供一个持久的线程。协调者不写代码，它指挥 subagent，每个 subagent 在自己的本地 git worktree 和分支里工作。这正是 Orchestrate playbook 所预期的形态。向协调者发送提示时以 `/poteto-mode` 开头，它派生出的 subagent 会遵循各个 playbook。
+为每项工作配一个协调者对话。协调者不写代码，它指挥 subagent，每个 subagent 在自己的本地 git worktree 和分支里工作。这正是 Orchestrate playbook 所预期的形态。向协调者发送提示时以 `/poteto-mode` 开头，它派生出的 subagent 会遵循各个 playbook。
 
 以下几个习惯会有所帮助：
 
-- 为每一块工作单独建立一个 Project，比如一个功能、一次迁移、一轮性能优化或一次技术债清理。多个 Project 可以并排运行。
-- 把相关的聊天拖进 Project，包括已经结束的。它们会成为该 Project 中每个 agent 的上下文。
+- 为每一块工作单独开一个协调者对话，比如一个功能、一次迁移、一轮性能优化或一次技术债清理。多个对话可以并排运行。
 - 在 PR 合并之前为其配置一个验证群，并让 Autopilot-stack 或 Autopilot-full 来负责推进队列。
 - 请协调者给出一份以数据为依据的计划，并让它先用原型回答悬而未决的问题，再来问你。
 
-一条提示就可以承载整个 Project，从调研一直到执行：
+一条提示就可以承载整项工作，从调研一直到执行：
 
 ```text
 /poteto-mode refactor this repo so its architecture is more agent friendly. use /correct and /architect on past commits and review comments to find the mistakes agents make most here. use /recall for context from past chats. answer open questions with prototypes instead of asking me. come back with a plan backed by real data. once i approve it, run it with autopilot-stack or autopilot-full, and ask me which.
