@@ -1,7 +1,8 @@
 ---
 name: deslop
 description: "Strip AI slop from a code diff: narrating comments, unsupported guards, dead compatibility paths, and unrelated edits. Use before committing, or when a diff feels padded."
-disable-model-invocation: true
+disable-model-invocation: false
+user-invocable: true
 ---
 
 # Deslop
