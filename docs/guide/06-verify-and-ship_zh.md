@@ -58,7 +58,7 @@
 
 [`/create-verification-skill`](../../skills/create-verification-skill/SKILL.md) 访谈的是仓库，而不是你。它会弄清楚用户会接触什么、应用如何在本地启动、什么可以驱动它（先看现有的 harness，否则是浏览器与 CDP、PTY，或普通 HTTP），什么证据能证明行为正确，以及两个实例能否并行运行。它只会问代码无法回答的问题。
 
-它会写出 `.cursor/skills/verify-<app>/`，其中包含面向 agent 的说明，带有确切的 Launch、Doctor、Drive、Evidence 和 Cleanup 小节，为它附带的脚本提供 Helpers 小节，并在 `features/` 下提供功能映射，索引应用做什么以及哪种结果能证明每项功能正常。该技能附带了一个[功能映射示例](../../skills/create-verification-skill/references/feature-map-example/)，包含 README 索引，以及每项功能一个文件，并使用四个必需的二级标题。交付之前，生成器会端到端地证明一次该技能：启动、doctor 检查、驱动一项功能、采集证据、清理，然后确认证据在清理之后仍然保留。如果这一证明失败，就不要使用输出。
+它会写出 `.claude/skills/verify-<app>/`，其中包含面向 agent 的说明，带有确切的 Launch、Doctor、Drive、Evidence 和 Cleanup 小节，为它附带的脚本提供 Helpers 小节，并在 `features/` 下提供功能映射，索引应用做什么以及哪种结果能证明每项功能正常。该技能附带了一个[功能映射示例](../../skills/create-verification-skill/references/feature-map-example/)，包含 README 索引，以及每项功能一个文件，并使用四个必需的二级标题。交付之前，生成器会端到端地证明一次该技能：启动、doctor 检查、驱动一项功能、采集证据、清理，然后确认证据在清理之后仍然保留。如果这一证明失败，就不要使用输出。
 
 从此以后，"在应用里验证它" 就成了任何 agent 都能在这个仓库中执行的一个步骤，无需任何设置对话。当你希望以特定形式拿到证明时，在提示词中指名：
 

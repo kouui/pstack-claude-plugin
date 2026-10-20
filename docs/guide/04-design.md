@@ -124,7 +124,7 @@ You might be wondering whether every change needs this. No. Most changes need no
 - A change that crosses function boundaries or moves ownership earns `/architect`, which brings `/arena` with it.
 - A standalone decision where independent attempts would help, like naming, formats, or an algorithm, is `/arena` directly.
 - A coverage matrix, set of parallel checks, or race with declared arms is `/swarm`.
-- An open question you could answer by running something, like a layout, a timing, or an approach, gets a prototype, not a debate.
+- An open question you could answer by running something, like a layout, a timing, or an approach, gets `/prototype`, not a debate.
 - A contested design that's expensive to reverse gets `/architect`, then `/interrogate` before shipping.
 - Work that spans several PRs gets a plan, written after the design settles.
 

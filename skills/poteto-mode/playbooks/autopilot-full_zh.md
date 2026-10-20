@@ -7,7 +7,7 @@
 1. **先满足操作者的闸门。** 授权只覆盖队列中的条目，因此操作者指定为归其所有的条目以及队列之外的 PR，都止步于 merge-ready。要求说明计划不等于批准。
 2. **为每个 PR 分派一个负责人，并让其工作位于替换者能够找到的地方。** 为整个项目一次性确定代码托管平台。GitHub CLI（`gh`）是默认选项。如果 `command -v origin` 成功，且 Origin 能够解析该仓库，则所有 PR 操作都使用 `origin pr`。否则继续使用 `gh`，并记录回退情况。绝不能要求使用 Graphite（`gt`）。每个负责人都是一个 Cursor 云端 agent，它按照 `playbooks/opening-a-pr.md` 构建并开启 PR，在真实产物上证明变更，按照 `playbooks/babysit.md` 将其维护到绿色，并在第 4 步和第 5 步通过后合并。
 
-   尽早开启 PR，让 CI 和机器人与工作并行运行。代码只有在经过 slop-strip（来自 `cursor-team-kit` 插件的 `deslop` skill（`/deslop`））和 `/no-comments` 检查之后才算就绪，因此完整 swarm 运行的是已完成的代码。然后 rebase 到当前 trunk，并在自证之前报告 code-ready head，使验证运行在 patch 将要落地的基线上。之后的每个 head 都要报告，并在自证、CI 和 babysit 完成后报告为 merge-ready。除非 trunk 发生冲突或破坏了 CI，否则修复轮次都停留在该基线上，因为每次 rebase 都会重启 CI。在 code-ready 推送之前，以及在需要验证者的后续推送之前，在已提交的 head 上为受影响的路径运行仓库的检查。
+   尽早开启 PR，让 CI 和机器人与工作并行运行。代码只有在经过 slop-strip（`deslop` skill（`/deslop`））和 `/no-comments` 检查之后才算就绪，因此完整 swarm 运行的是已完成的代码。然后 rebase 到当前 trunk，并在自证之前报告 code-ready head，使验证运行在 patch 将要落地的基线上。之后的每个 head 都要报告，并在自证、CI 和 babysit 完成后报告为 merge-ready。除非 trunk 发生冲突或破坏了 CI，否则修复轮次都停留在该基线上，因为每次 rebase 都会重启 CI。在 code-ready 推送之前，以及在需要验证者的后续推送之前，在已提交的 head 上为受影响的路径运行仓库的检查。
 
    假设 VM 会崩溃。开始后不久，推送并在根 agent 的存储（路径见系统提示）中按照 **show-me-your-work** skill 开始一份决策记录，之后每个值得保留的单元完成后都要推送。派生子 agent 的一方要在该存储中记录其 id、状态，以及根据同类过往运行得出的 stuck-after 运行时长，以便在父 agent 崩溃时，根可以探查它。只对自己的分支执行强制推送，使用 `--force-with-lease`，并固定到你最后一次推送或接管的 SHA；对于任何不是你做出的推送，都要停止并报告给根。
 3. **负责人在 trunk 上并行运行，绝不堆叠，** 使每个 PR 都能独立落地。

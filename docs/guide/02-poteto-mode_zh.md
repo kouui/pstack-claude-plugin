@@ -90,7 +90,7 @@ continue
 keep going until done
 ```
 
-短句之所以有效，是因为 playbook 承载了结构，而 Custom Mode 会在每一轮都让 `/poteto-mode` 保持在上下文中。[设置 pstack](./01-setup.md#run-your-first-task) 展示了如何启动它。你的话传递意图，skill 负责严谨性。
+短句之所以有效，是因为 playbook 承载了结构。[设置 pstack](./01-setup.md#run-your-first-task) 展示了如何启动它。你的话传递意图，skill 负责严谨性。
 
 ## 用 "new task" 切换任务
 
@@ -102,9 +102,7 @@ keep going until done
 
 "new task" 会告诉 `/poteto-mode` 重新匹配，而不是延续之前的 playbook。"don't change any code yet" 把这次任务固定为 Investigation。如果没有这两个短语，处于 Feature 中间的模式往往会把你的问题当作下一个功能步骤。
 
-## 为并行工作分配独立的机器
-
-如果你在同一台电脑上用多个 agent 操作同一个仓库，它们会争抢工作树、端口和构建输出。最干净的隔离方式是 [云端 subagent](https://cursor.com/docs/subagents#cloud-subagents)。每个 subagent 都拥有自己的 VM 和分支，因此它可以安装依赖、运行你的应用并录制结果视频，而不会触碰你的机器。在任务前输入 `/in-cloud`，或让父聊天把工作交给云端 subagent。
+## 为并行工作分配独立的 worktree
 
 当工作必须留在本地时，预先要求一个 worktree：
 

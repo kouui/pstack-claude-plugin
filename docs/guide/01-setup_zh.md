@@ -26,7 +26,7 @@
 
 设置结束时，`/setup-pstack` 会查找在你的项目中证明应用行为的方法，即 `verify-*` 技能或现有的测试工具（harness）。如果两者都找不到，它会提供一次机会，用 [`/create-verification-skill`](../../skills/create-verification-skill/SKILL.md) 生成一个。
 
-你同意后，它会写入 `.cursor/skills/verify-<app>/`，这是一个项目本地技能，教代理像用户一样操作你的应用。交付前它会先证明该技能可以正常工作。你拒绝的话，设置会直接继续。你随时可以自己运行 `/create-verification-skill`。[验证与交付](./06-verify-and-ship.md#create-a-project-verification-skill)对此有深入介绍。
+你同意后，它会写入 `.claude/skills/verify-<app>/`，这是一个项目本地技能，教代理像用户一样操作你的应用。交付前它会先证明该技能可以正常工作。你拒绝的话，设置会直接继续。你随时可以自己运行 `/create-verification-skill`。[验证与交付](./06-verify-and-ship.md#create-a-project-verification-skill)对此有深入介绍。
 
 如果你是 pstack 新手，请同意。能够检查自己工作的代理会一直做下去，直到检查通过；不能检查的代理则会把每个结果交回给你，由你手动核对。在本指南的所有内容中，验证技能带来的收益最大。
 
@@ -52,7 +52,5 @@ pstack 会在子代理和审查面板上额外消耗 token，这是严谨性的�
 ```
 
 观察待办列表。它的前几项是匹配到的操作手册步骤，即针对此提示的 Feature 手册。如果 `/poteto-mode` 跳过了某个步骤，该步骤会保留在列表中并标注 `skip: <reason>`，这样你就能看到它选择不做什么。
-
-之后你可以正常输入后续跟进。要让 `/poteto-mode` 在整个对话中保持开启，请在 `/` 菜单中用 Option+Enter（Mac）或 Alt+Enter（Windows）选择它，而不是按 Enter。这样它会成为[自定义模式](https://cursor.com/docs/skills#using-a-skill-as-a-custom-mode)，每一轮都留在上下文中，直到你退出。自定义模式可在 Agents Window 和 CLI 中使用。普通的 Enter 只把技能附加到一条消息上，随着对话推进它会逐渐淡出。
 
 下一步：[通过 `/poteto-mode` 分派工作](./02-poteto-mode.md)。

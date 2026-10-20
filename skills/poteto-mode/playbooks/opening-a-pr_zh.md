@@ -6,7 +6,7 @@
 
 **Commits。** 大胆提交。在提交 PR 之前，将改动 rebase 成小而有序的 commit。每个 commit 都是一个未来的 PR：可以独立合并，并按顺序讲述故事。如果修复属于刚刚做出的 commit，则 amend。如果修复可以单独拆出，则新建 commit。commit 正文不要重复主题行的内容。
 
-**PRs。** 在提交之前，对 diff 运行 `cursor-team-kit` 中的 `/deslop`，在进入评审之前运行 `/no-comments`。所有 PR 标题、描述和 commit 正文都使用 `/technical-writing` 编写（覆盖除 Diátaxis 之外的每一层，并应用 STE 词汇规则：每个动作一个词，保留冠词，能用普通动词时不用 `-ing` 形式），然后应用 `/unslop`。
+**PRs。** 在提交之前，对 diff 运行 `/deslop`，在进入评审之前运行 `/no-comments`。所有 PR 标题、描述和 commit 正文都使用 `/technical-writing` 编写（覆盖除 Diátaxis 之外的每一层，并应用 STE 词汇规则：每个动作一个词，保留冠词，能用普通动词时不用 `-ing` 形式），然后应用 `/unslop`。
 
 **Titles。** 使用 Conventional Commits 格式 `type(scope): subject`，结尾不加句号。type 例如 `feat`、`fix`、`docs`、`refactor`、`test`、`chore` 或 `perf`。scope 是所属领域，例如 `pstack` 或 `poteto-mode`。subject 要简短、使用祈使语气，并且当某个真实符号承载了这次改动时，要写出该符号的名称，例如 `fix(pstack): retarget opening-a-pr babysit trigger`。
 

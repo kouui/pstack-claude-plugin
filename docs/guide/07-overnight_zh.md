@@ -23,7 +23,7 @@
 /poteto-mode im going to bed. migrate every caller to the new parser in a fresh worktree off <base>.
 done means zero old callers, all parser fixtures pass, old api deleted.
 keep a decision log. don't ask me before committing.
-/loop until done. if you're truly stuck after a few hours, stop and write up why.
+/loop until done. alarm yourself in N hours to detect stucks, stop and write up why.
 ```
 
 逐行看看每一句给你带来了什么：
@@ -32,7 +32,7 @@ keep a decision log. don't ask me before committing.
 - "done means..." 把目标变成了每一轮迭代都能运行的检查项。
 - "fresh worktree off `<base>`" 让这次运行不会和你打开的其他东西互相冲突。
 - "don't ask me before committing" 提前回答了 agent 否则会卡住等待的权限问题。
-- `/loop` 是 Cursor 内置的唤醒机制，不是 pstack 的 skill。[自主运行 playbook](../../skills/poteto-mode/playbooks/autonomous-run.md) 用它在事件发生或心跳到达时重新检查完成条件。
+- `/loop` 是运行环境内置的唤醒机制（Cursor 的 `/loop`、Claude Code 的 `loop` skill），不是 pstack 的 skill。[自主运行 playbook](../../skills/poteto-mode/playbooks/autonomous-run.md) 用它在事件发生或心跳到达时重新检查完成条件。
 - 出口让它在遇到真正的死胡同时停下来，并写明原因。这比让它花八个小时对目标进行创造性的重新解读要好得多。
 
 因为你会在离开之后审阅这些工作，所以 `/poteto-mode` 会把它交给 [`/figure-it-out`](../../skills/figure-it-out/SKILL.md) 处理。这个 skill 会在动任何代码之前设计运行的各个阶段，并接入决策日志。
@@ -114,8 +114,6 @@ flowchart TD
 
 - 每个阶段都可以叫停整条流水线。分诊可以判定该报告是预期行为，复现可以失败、无法复现问题，修复者可以判断改动风险过高。这些结果每一个都有用，因为它们能阻止糟糕的工作流入下一个阶段，而那里的撤销成本更高。
 - 每个阶段都会交出证据。复现会附上损坏状态的截图和视频，修复会附上修复前后的证明。这样，人在阅读任何一行代码之前，就能先检查 agent 是否修对了东西。
-
-pstack 把这个方案作为一个处于休眠状态的 [自动化包](https://github.com/cursor/plugins/blob/main/pstack/automations/benny/README.md) 提供，用于 Slack 问题报告。其中一个自动化对每个报告进行分诊，另一个复现已确认的 bug，并可能准备一个小的修复草稿。把 agent 指向它的 [`FOR_AGENTS.md`](https://github.com/cursor/plugins/blob/main/pstack/automations/benny/FOR_AGENTS.md)，并写明目标仓库，即可完成设置。
 
 **常见陷阱：** 时长不是完成条件。"work on this for 4 hours" 没有给 agent 任何可以检查的东西，你醒来时看到的只会是四个小时的忙碌，而不是一个结果。给 `/loop` 一个可以通过或失败的判定条件。
 

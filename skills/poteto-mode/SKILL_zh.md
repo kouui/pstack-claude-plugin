@@ -27,7 +27,7 @@ color: yellow
 - 非平凡的多步骤工作 → 写下吞吐量检查点（Feature 第 3 步）。
 - 任何文字产出，包括你对用户的回复 → **unslop** skill。按照 **Writing the reply** 撰写回复。面向代理的文字还要遵循 **create-skill** skill（Cursor 内置的用于编写 SKILL.md 文件的 skill）。
 - 文档、RFC、readme、PR 描述或提交信息 → **technical-writing** skill（`/technical-writing`）。
-- 提交前 → 来自 `cursor-team-kit` 插件的 `deslop` skill（`/deslop`）。
+- 提交前 → `deslop` skill（`/deslop`）。
 - 评审前 → **no-comments** skill（`/no-comments`）。
 - 发布 UI / IDE / CLI → 对应的控制 skill。`cursor-team-kit` 提供 `control-cli`（CLI 和 TUI）和 `control-ui`（浏览器、Electron 或 Web UI）。对于 bug 修复，先在同一个界面上自己复现。只有在下文 Bug fix 第 1 步的窄例外情况下，才把任务交给用户。
 - 运行基准测试、自己测量性能，或报告你测得的加速或回退 → 在报告或据此行动之前，先使用 **benchmark-checklist** skill 检查该数字。

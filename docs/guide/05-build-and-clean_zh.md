@@ -56,7 +56,7 @@ Bug 类 prompt 说明症状，并要求先复现：
 
 ## 提交前先清理
 
-[提交 PR 手册](../../skills/poteto-mode/playbooks/opening-a-pr.md) 在每次 commit 之前对 diff 运行 `/deslop`，并对 PR 描述和 commit 正文应用 [`/unslop`](../../skills/unslop/SKILL.md)。`/deslop` 随 `cursor-team-kit` 插件提供，而不在 pstack 中。如果你没有安装它，就用普通的话直接提出同样的要求：删除叙述性注释、没有依据的防御性判断、无用的兼容路径，以及无关的改动。
+[提交 PR 手册](../../skills/poteto-mode/playbooks/opening-a-pr.md) 在每次 commit 之前对 diff 运行 `/deslop`，并对 PR 描述和 commit 正文应用 [`/unslop`](../../skills/unslop/SKILL.md)。[`/deslop`](../../skills/deslop/SKILL.md) 随 pstack 提供。它会从 diff 中删除叙述性注释、没有依据的防御性判断、无用的兼容路径以及无关的改动。
 
 对于文字内容，`/unslop` 接受一个目标，以及你自己的额外规则：
 

@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 回答用户关于 pstack 的问题，给出一个用户可以发送的 prompt，并链接答案所出自的文件。对于求助类问题，不要开始工作。用户问的是怎么做，而 pstack 运行会消耗真实的 token，所以应该让用户自己发送 prompt。
 
-要求做事的消息，例如"用 pstack 修复这个 bug"，不是求助问题。阅读 [`poteto-mode`](../poteto-mode/SKILL.md)，按其流程完成工作，并提醒一次：Custom Mode 可以让它保持开启。
+要求做事的消息，例如"用 pstack 修复这个 bug"，不是求助问题。阅读 [`poteto-mode`](../poteto-mode/SKILL.md)，按其流程完成工作。
 
 本文件把问题映射到存有答案的 skill 和指南页面。那些文件负责具体细节。引用之前先阅读你要链接的文件，并且当它与本映射不一致时，以它为准。这里的链接指向已安装的插件，用户可能无法打开，所以要给用户该文件的公开副本：`https://github.com/cursor/plugins/blob/main/pstack/` 加上它的路径。
 
@@ -47,19 +47,13 @@ disable-model-invocation: true
 
 pstack 是为 Cursor 构建的，它也可以通过 `/plugin marketplace add cursor/plugins`，然后执行 `/plugin install pstack@cursor-plugins` 安装到 Claude Code 中。在那里，每个命令都要加上 `pstack:` 前缀，例如 `/pstack:poteto-mode`。[Claude Code 适配器](../../docs/harness/claude-code.md)负责映射 Cursor 名称，而需要仅限 Cursor 功能的步骤，例如 Bugbot 或 Automations，会被跳过，并附一行说明。
 
-其他工具可以读取这些 skill，因为它们使用 Agent Skills 格式。但大多数工作流 skill，包括 `/poteto-mode`、`/how`、`/why` 和 `/teach`，会启动带有按角色模型的 Cursor subagent，而 Custom Mode 和 `/loop` 都是 Cursor 功能，因此这些部分在其他工具中可能无法工作。
+其他工具可以读取这些 skill，因为它们使用 Agent Skills 格式。但大多数工作流 skill，包括 `/poteto-mode`、`/how`、`/why` 和 `/teach`，会启动带有按角色模型的 Cursor subagent，因此这些部分在其他工具中可能无法工作。
 
 ## 用 `/poteto-mode` 开始任务
 
 `/poteto-mode` 会把任务匹配到一个 playbook，把 playbook 的步骤复制到待办列表中，并在步骤需要时运行其他 skill。被跳过的步骤会以 `skip: <reason>` 的形式留在列表中。好的 prompt 会说明目标以及如何判断任务已完成。它不列出 skill，因为手写的顺序往往会丢掉或打乱 playbook 原本会保留的步骤。在帮用户措辞 prompt 之前，阅读 [`references/prompting.md`](references/prompting.md)。[指南第 2 页](../../docs/guide/02-poteto-mode.md)有示例。
 
-`/poteto-mode` 是否保持开启，取决于用户如何启动它：
-
-- 在 `/poteto-mode` 上按 Enter，会把该 skill 附加到单条消息上。随着对话推进，它会逐渐失效。
-- Mac 上按 Option+Enter，或 Windows 上按 Alt+Enter，或从 skill 条目中选择 Use as Mode，会把它变成 Custom Mode。它会在每一轮都保留在上下文中，直到用户退出该模式，并且不会出现在闲聊的轮次中。
-- Cursor 的文档列出了 Agents Window 和 CLI 中的 Custom Mode。在其他地方，每个新任务都要以 `/poteto-mode` 开始。
-
-提到这一点时，链接 [Cursor 的 skills 文档](https://cursor.com/docs/skills)。在聊天中途，说"新任务"会让该模式匹配一个新的 playbook。`/poteto-mode` 已经为其 playbook 步骤所启动的 subagent 使用 `poteto-agent`。要让你自己的 subagent 具有相同风格，请用 `subagent_type: "poteto-agent"` 启动它。
+输入 `/poteto-mode` 会把该 skill 附加到那一条消息上，随着对话推进它会逐渐失效。每个新任务都要以 `/poteto-mode` 开始。在聊天中途，说"新任务"会让该模式匹配一个新的 playbook。`/poteto-mode` 已经为其 playbook 步骤所启动的 subagent 使用 `poteto-agent`。要让你自己的 subagent 具有相同风格，请用 `subagent_type: "poteto-agent"` 启动它。
 
 ## 选择 skill
 
@@ -113,8 +107,8 @@ pstack 是为 Cursor 构建的，它也可以通过 `/plugin marketplace add cur
 
 不在 pstack 中的内容：
 
-- `/deslop`、`control-cli` 和 `control-ui` 随 `cursor-team-kit` 插件提供。
-- `/loop` 和 `/create-skill` 是 Cursor 内置功能。
+- `control-cli` 和 `control-ui` 随 `cursor-team-kit` 插件提供。
+- `/loop` 和 `/create-skill` 是运行环境内置功能。
 - pstack 没有 `/orchestrate` skill。Orchestrate 是 `/poteto-mode` 的一个 playbook。如果斜杠菜单显示 `/orchestrate`，说明是另一个插件提供的。
 
 ## Playbook 与 principle
@@ -138,7 +132,6 @@ Principle 是 `/poteto-mode` 读取并在回复中引用的单条规则 skill。
 
 | 症状 | 修复方法 |
 |---|---|
-| 该模式在几轮之后停止生效 | 它是用 Enter 启动的。以 Custom Mode 的方式启动它，或者每个任务都以 `/poteto-mode` 开始。 |
 | 一个问题被当作上一个任务的下一步来处理 | 说"new task"，或说明这一轮不需要该模式。 |
 | 新的模型选择没有效果 | `/setup-pstack` 的规则适用于新聊天。开始一个新聊天。 |
 | 运行成本高于预期 | 参见"完成设置"下的成本段落。 |
