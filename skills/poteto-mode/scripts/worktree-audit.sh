@@ -61,9 +61,23 @@ elif raw=$(gh pr list --author "@me" --state all --limit 1000 \
 fi
 [ -s "$prs" ] || echo "[]" > "$prs"
 
-# Transcripts dir: ~/.cursor/projects/<slugified-repo-path>/agent-transcripts.
-slug=$(printf '%s' "$main_wt" | sed 's#^/##; s#/#-#g')
-transcripts="$HOME/.cursor/projects/$slug/agent-transcripts"
+# Transcripts: ~/.claude/projects/<slug>/<session>.jsonl, where <slug> is the
+# working directory with every character that is not a letter or digit changed
+# to "-". A chat run inside a worktree is stored under that worktree's own slug,
+# so each worktree checks its own slug dir and the main repo's.
+slugify() { printf '%s' "$1" | sed 's#[^A-Za-z0-9]#-#g'; }
+main_transcripts="$HOME/.claude/projects/$(slugify "$main_wt")"
+mtime() { stat -c %Y "$1" 2>/dev/null || stat -f %m "$1" 2>/dev/null; }
+fmtdate() { date -d "@$1" '+%Y-%m-%d' 2>/dev/null || date -r "$1" '+%Y-%m-%d' 2>/dev/null; }
+# Transcript files that mention the worktree path followed by "/" or a quote, so
+# glint-482 does not match glint-482-r37. Uses rg when installed, else grep.
+find_chats() {
+	if command -v rg >/dev/null 2>&1; then
+		rg -l --glob '*.jsonl' -e "${wt}/" -e "${wt}\"" "$@" 2>/dev/null
+	else
+		grep -rlF --include='*.jsonl' -e "${wt}/" -e "${wt}\"" "$@" 2>/dev/null
+	fi
+}
 now=$(date +%s)
 
 echo "# base: $base"
@@ -103,11 +117,15 @@ git worktree list --porcelain | awk '/^worktree /{print $2}' | while read -r wt;
 	# Most recent chat whose transcript operated in this worktree. Match path
 	# followed by "/" or a quote so glint-482 does not match glint-482-r37.
 	last="-"; last_ts=0
-	if [ -d "$transcripts" ]; then
-		f=$(rg -l -e "${wt}/" -e "${wt}\"" "$transcripts" 2>/dev/null \
-			| xargs stat -f '%m %N' 2>/dev/null | sort -rn | head -1)
-		if [ -n "$f" ]; then last_ts=$(echo "$f" | awk '{print $1}')
-			last=$(date -r "$last_ts" '+%Y-%m-%d' 2>/dev/null); fi
+	dirs=()
+	[ -d "$main_transcripts" ] && dirs+=("$main_transcripts")
+	wt_transcripts="$HOME/.claude/projects/$(slugify "$wt")"
+	[ -d "$wt_transcripts" ] && dirs+=("$wt_transcripts")
+	if [ ${#dirs[@]} -gt 0 ]; then
+		while read -r tf; do
+			ts=$(mtime "$tf"); [ -n "$ts" ] && [ "$ts" -gt "$last_ts" ] && last_ts=$ts
+		done < <(find_chats "${dirs[@]}")
+		[ "$last_ts" -gt 0 ] && last=$(fmtdate "$last_ts")
 	fi
 	recent=$([ "$last_ts" -gt 0 ] 2>/dev/null && [ $(( (now - last_ts) / 86400 )) -le 4 ] && echo yes || echo no)
 
