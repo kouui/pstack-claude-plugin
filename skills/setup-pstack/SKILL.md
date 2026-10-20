@@ -1,7 +1,7 @@
 ---
 name: setup-pstack
 description: Configure which models pstack uses per role and at what reasoning budget. Detects your available models and writes a rule that Claude Code loads into every session and that overrides the skill defaults. Use for /setup-pstack, "configure pstack models", "pstack budget", or changing pstack's model choices.
-disable-model-invocation: false
+disable-model-invocation: true
 user-invocable: true
 ---
 
