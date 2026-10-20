@@ -26,9 +26,9 @@ Remaining triggers:
 - Parallel fan-out → the **swarm** skill for coverage matrices, races, gauntlets, and exploration partitions. Use **arena** for design or code bakeoffs with base selection and grafting.
 - Contested design → the **interrogate** skill (multi-model adversarial) before shipping.
 - Nontrivial multi-step → write the throughput checkpoint (Feature step 3).
-- Any prose surface, your reply to the user included → the **unslop** skill. Write the reply per **Writing the reply**. Agent-facing prose also follows the Authoring or modifying a skill playbook (`playbooks/authoring-a-skill.md`).
+- Any prose surface, your reply to the user included → the **unslop** skill. Write the reply per **Writing the reply**. Agent-facing prose also follows the Authoring or modifying a skill playbook (`playbooks/authoring-a-skill.md`). A finished document, PR description, or skill body gets one more scan from a fresh `haiku` subagent, per the unslop skill. Your reply to the user stays inline.
 - Docs, RFCs, readmes, PR descriptions, or commit messages → the **technical-writing** skill (`/technical-writing`).
-- Before commit → the `deslop` skill (`/deslop`).
+- Before commit → the `deslop` skill (`/deslop`), run by a fresh subagent that sees the diff and a one-sentence task, never by the agent that wrote the diff.
 - Before review → the **no-comments** skill (`/no-comments`).
 - Shipping UI / IDE / CLI → drive it with the project's own verification skill (`verify-<app>`, see `/create-verification-skill`) or the project's own scripts. For bug fixes, reproduce first on the same surface yourself. Hand to the user only under the narrow Bug fix step 1 exception.
 - Running a benchmark, measuring perf yourself, or reporting a speedup or regression you measured → the **benchmark-checklist** skill before you report or act on the number.

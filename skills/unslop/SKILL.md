@@ -61,3 +61,11 @@ Rule numbers are stable ids that other skills cite. A removed rule leaves a gap.
 31. **Prefer the plain word.** "utilize" and "leverage" become "use", "facilitate" becomes "help", "numerous" becomes "many", "in the event that" becomes "if". The fancier synonym is rarely clearer.
 32. **Mannered prose.** Metaphor or flourish where a literal phrase exists: aphorisms ("wire it or delete it"), rhetorical fragments for effect, personified code ("the plan holds it"), figurative verbs ("rides along", "stands on"), stock framing phrases. "A dial worth turning" becomes "a parameter worth varying". Say what you mean. Rule 26 covers the metaphor nouns.
 33. **Over-compression.** Dropped articles, verbless fragments, symbol-speak, and abbreviations that make the reader decode instead of read. "Parser rejects bad date → exit 2, no write" becomes "The parser rejects a bad date, exits with code 2, and writes nothing." Write whole sentences with their articles and verbs, and spell out arrows and abbreviations.
+
+## Scanning finished text
+
+When a document, PR description, or skill body is finished, spawn a fresh subagent (`Explore`, `model: "haiku"`) for one more scan. Tell it not to edit files. Give it the file path or the text and this skill's rules. It reports each hit as the rule number, the quoted text, and a suggested replacement. Haiku only detects, because it matches patterns well and can drift on meaning when it rewrites.
+
+You apply the fixes. Reject any suggestion that changes what the text claims. Your reply to the user is not scanned this way. Write it clean as you go.
+
+A short text, such as a one-line commit body, does not need the extra pass.

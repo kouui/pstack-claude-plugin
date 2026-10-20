@@ -37,3 +37,7 @@ Use the caller's files or diff. Otherwise use the current diff against the base 
 - Do not widen scope. Out-of-diff slop goes in the report, not in the diff.
 - Do not delete a comment that carries a constraint such as `do not remove` or `talk to X before changing`. Hand those to **no-comments**.
 - Prefer deleting over rewording.
+
+## Who runs it
+
+Deslop is a review of the author's own diff, so the author does not run it. Spawn a fresh subagent (`general-purpose`, `sonnet high`, or the `swarm workers` line) and give it the diff range, the one-sentence task, and the rules in this skill. Do not give it the author's reasoning or chat history. It edits the working tree, runs the checks in step 4, and returns the report from step 5. Review its diff before you commit.
