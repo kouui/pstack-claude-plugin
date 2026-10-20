@@ -7,8 +7,6 @@ user-invocable: true
 
 # Interrogate
 
-In Claude Code, read [the Claude Code adapter](../../docs/harness/claude-code.md) once per session before you follow this skill. It maps the Cursor names in pstack skills to Claude Code.
-
 Spawn one reviewer per configured model to adversarially review code changes. The adversarial signal comes from model diversity, not assigned personas. The deliverable is a synthesized verdict. Do NOT auto-apply changes.
 
 ## Step 1, Scope
@@ -34,7 +32,7 @@ Launch all reviewers in a single message with the Agent tool, one per entry on t
 | Reviewer A | `sonnet high` |
 | Reviewer B | `codex` |
 
-Each reviewer gets `subagent_type: "Explore"` (the brief says "do not edit files"), and `model` set to its configured entry, or its table default when there is no configured line. Omit `model` for an `auto` or `inherit-parent` entry, so that reviewer runs on the parent model. A `codex` entry is not a Claude model. It runs through the Codex CLI as the Claude Code adapter's Models table describes. The reviewer stays read-only.
+Each reviewer gets `subagent_type: "Explore"` (the brief says "do not edit files"), and `model` set to its configured entry, or its table default when there is no configured line. Omit `model` for an `auto` or `inherit-parent` entry, so that reviewer runs on the parent model. A `codex` entry is not a Claude model. It runs through the Codex CLI as the Codex seats paragraph in the Subagents section of the **poteto-mode** skill describes. The reviewer stays read-only.
 
 If the Agent tool rejects a configured entry, run that reviewer on its table default and say so. If it rejects a table default, spawn with the closest valid model from the error message (prefer the same model and reasoning tier), and open a separate PR to update the default table. Do not block the review on the model issue. Never treat an alias entry as a rejected model or apply the fallback to it.
 

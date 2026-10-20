@@ -23,7 +23,7 @@ claude plugin install pstack@magic-claude-code-plugin -s user
 
 (the marketplace entry is not registered yet. to try it from a local checkout, run `claude --plugin-dir <path-to-this-repo>`.)
 
-claude code prefixes plugin commands and agents, so `/poteto-mode` is `/pstack:poteto-mode`. the [claude code adapter](./docs/harness/claude-code.md) maps every other cursor name. `/pstack:setup-pstack` writes your model choices to `~/.claude/rules/pstack-models.md`, and a step that needs a cursor-only feature, such as bugbot or automations, is skipped with a one-line note.
+claude code prefixes plugin commands and agents, so `/poteto-mode` is `/pstack:poteto-mode`. `/pstack:setup-pstack` writes your model choices to `~/.claude/rules/pstack-models.md`, and a step that needs a cursor-only feature, such as bugbot or automations, is skipped with a one-line note.
 
 ## get started
 

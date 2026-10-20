@@ -4,7 +4,7 @@ In this page you install the plugin, pick which models pstack uses, and run your
 
 ## Install the plugin
 
-In Claude Code, run `claude plugin install pstack@magic-claude-code-plugin -s user`. Claude Code prefixes plugin commands, so each command in this guide takes a `pstack:` prefix there, such as `/pstack:setup-pstack`, which writes its model rule to `~/.claude/rules/pstack-models.md`. The [Claude Code adapter](../harness/claude-code.md) covers the other differences.
+In Claude Code, run `claude plugin install pstack@magic-claude-code-plugin -s user`. Claude Code prefixes plugin commands, so each command in this guide takes a `pstack:` prefix there, such as `/pstack:setup-pstack`, which writes its model rule to `~/.claude/rules/pstack-models.md`.
 
 ## Pick your models
 

@@ -7,8 +7,6 @@ user-invocable: true
 
 # What should I ask
 
-In Claude Code, read [the Claude Code adapter](../../docs/harness/claude-code.md) once per session before you follow this skill. It maps the Cursor names in pstack skills to Claude Code.
-
 Turn the user's request into a recommendation: which pstack skills to use, and how to word the question. The guide in [`docs/guide/`](../../docs/guide/README.md) is the source. Do not answer from memory.
 
 1. Take the request as the user wrote it. If the user gave none, ask for one sentence about what they want to get done, then stop.

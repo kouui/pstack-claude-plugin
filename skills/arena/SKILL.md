@@ -7,8 +7,6 @@ user-invocable: true
 
 # Arena
 
-In Claude Code, read [the Claude Code adapter](../../docs/harness/claude-code.md) once per session before you follow this skill. It maps the Cursor names in pstack skills to Claude Code.
-
 Open a todolist with one entry per phase (Frame, Fan out, Cross-judge, Pick, Graft, Verify) before launching anything.
 
 ## Phase A: Frame
@@ -17,7 +15,7 @@ Every candidate gets the same prompt, so the prompt is the contract.
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric, 3-6 concrete gradeable criteria for what success looks like on *this* task. It is the picker's tool in Phase D. Candidates only see the task.
-3. Pick the runners. Use the `arena runners` line in `~/.claude/rules/pstack-models.md`. If the rule or that line is missing, default to one each on `sonnet high` and `codex`. An `auto` or `inherit-parent` entry in this line or the cross-judge line means the parent model, so omit `model` for it. If the Agent tool rejects a configured entry, or the entry is `codex` and the Codex CLI is not installed, run that seat on `sonnet high` and say so. If it rejects `sonnet high`, use the closest valid model from its error message. A `codex` entry is not a Claude model. It runs through the Codex CLI as the Claude Code adapter's Models table describes. Spawn more runners when the arena covers multiple design directions. Use the same model N times when the work is generation-bound rather than judgment-sensitive. Pick each subagent's reasoning level for the job, per the Subagents section of the **poteto-mode** skill.
+3. Pick the runners. Use the `arena runners` line in `~/.claude/rules/pstack-models.md`. If the rule or that line is missing, default to one each on `sonnet high` and `codex`. An `auto` or `inherit-parent` entry in this line or the cross-judge line means the parent model, so omit `model` for it. If the Agent tool rejects a configured entry, or the entry is `codex` and the Codex CLI is not installed, run that seat on `sonnet high` and say so. If it rejects `sonnet high`, use the closest valid model from its error message. A `codex` entry is not a Claude model. It runs through the Codex CLI as the Codex seats paragraph in the Subagents section of the **poteto-mode** skill describes. Spawn more runners when the arena covers multiple design directions. Use the same model N times when the work is generation-bound rather than judgment-sensitive. Pick each subagent's reasoning level for the job, per the Subagents section of the **poteto-mode** skill.
 4. Give each candidate its own output location (a git worktree where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`), per the **separate-before-serializing-shared-state** principle skill.
 
 ## Phase B: Fan out

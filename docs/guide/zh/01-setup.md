@@ -4,7 +4,7 @@
 
 ## 安装插件
 
-在 Claude Code 中运行 `claude plugin install pstack@magic-claude-code-plugin -s user`。Claude Code 会为插件命令加上前缀，因此本指南中的每个命令在那里都要加 `pstack:` 前缀，例如 `/pstack:setup-pstack`，它会把模型规则写入 `~/.claude/rules/pstack-models.md`。[Claude Code 适配器](../../harness/claude-code.md)介绍了其他差异。
+在 Claude Code 中运行 `claude plugin install pstack@magic-claude-code-plugin -s user`。Claude Code 会为插件命令加上前缀，因此本指南中的每个命令在那里都要加 `pstack:` 前缀，例如 `/pstack:setup-pstack`，它会把模型规则写入 `~/.claude/rules/pstack-models.md`。
 
 ## 选择模型
 

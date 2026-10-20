@@ -7,8 +7,6 @@ user-invocable: true
 
 # Setup pstack
 
-In Claude Code, read [the Claude Code adapter](../../docs/harness/claude-code.md) once per session before you follow this skill. It maps the Cursor names in pstack skills to Claude Code.
-
 Write `~/.claude/rules/pstack-models.md`, a rule that sets pstack's model per role. Claude Code loads every `.md` file in `~/.claude/rules/` into each new session.
 
 This plugin supports three models for now: `opus`, `sonnet`, `haiku` (the 5.5 family). Panel roles can also use `codex`, which runs through the Codex CLI and is not a model. Other models can be added later.
